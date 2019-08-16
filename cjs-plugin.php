@@ -56,14 +56,29 @@ function cjs_add_class_to_body()
 
 function cjs_options_page()
 {
-    add_menu_page(
-            'CJs',
+/* Using this function will add a menu option directly on the main menu
+     add_menu_page(
+        'CJs',
         'CJs Options',
         'manage_options',
         'cjs',
         'cjs_options_page_html',
         '',
         20
+    );
+*/
+
+/*
+ * Using this function will add a submenu option under Tools
+*/
+
+    add_submenu_page(
+            'tools.php',
+        'CJs Options',
+        'CJs Options',
+        'manage_options',
+        'cjs',
+        'cjs_options_page_html'
     );
 }
 
@@ -93,7 +108,7 @@ function cjs_options_page_html()
 /*
  * Enabling this action will remove the default Options page in the Admin Menu
  * It is still directly accessible.
- * Use add_action('admin_menu', 'cjs_options_page_remove');
+ * Use add_action('admin_menu', 'cjs_options_page_remove', 99);
  * Must be below add_action('admin_menu', 'cjs_options_page');
  */
 
