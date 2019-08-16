@@ -11,8 +11,6 @@ License: GPL2
 */
 
 
-
-
 /*
 Begin Activation Functions
 */
@@ -41,13 +39,9 @@ function load_plugin() {
 add_action(admin_init, load_plugin());
 
 
-
-
 /*
  * Below here will be the core functionality of our plugin
  */
-
-
 
 
 /*
