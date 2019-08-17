@@ -117,7 +117,21 @@ function cjs_options_page_remove()
     remove_menu_page('cjs');
 }
 
+/*
+ * Basic shortcode function
+ */
+function cjs_shortcodes_init()
+{
+    function cjs_shortcode($atts = [], $content = null)
+    {
+	    echo esc_html('My shortcode works!');
+	    return $content;
+    }
+    add_shortcode('cjs', 'cjs_shortcode');
+}
+
 add_action('admin_menu', 'cjs_options_page');
+add_action('init', 'cjs_shortcodes_init');
 add_filter('body_class', 'cjs_add_class_to_body');
 
 
