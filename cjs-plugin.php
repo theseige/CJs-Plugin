@@ -14,7 +14,6 @@ License: GPL2
 /*
 Begin Activation Functions
 */
-
 function generate_activation_notice()
 {
     ?>
@@ -103,6 +102,8 @@ function cjs_options_page_html()
             <p><?php echo esc_html('It works!' ); ?></p>
         </div>
     <?php
+    $body = wp_remote_retrieve_body( wp_remote_get('https://api.github.com/users/theseige' ));
+    echo $body;
 }
 
 /*
@@ -111,20 +112,42 @@ function cjs_options_page_html()
  * Use add_action('admin_menu', 'cjs_options_page_remove', 99);
  * Must be below add_action('admin_menu', 'cjs_options_page');
  */
-
 function cjs_options_page_remove()
 {
     remove_menu_page('cjs');
 }
 
+/*
+ * Modify the post object using this function
+ * Implement add_action('the_post', 'cjs_post_action');
+ * to include and test this functionality
+ */
+function cjs_post_action()
+{
+    echo esc_html('This is a post action performed by CJs Plugin!');
+}
+
+/*
+ * Basic shortcode function
+ */
+function cjs_shortcodes_init()
+{
+    function cjs_shortcode($atts = [], $content = null)
+    {
+	    echo esc_html('My shortcode works!');
+	    return $content;
+    }
+    add_shortcode('cjs', 'cjs_shortcode');
+}
+
 add_action('admin_menu', 'cjs_options_page');
+add_action('init', 'cjs_shortcodes_init');
 add_filter('body_class', 'cjs_add_class_to_body');
 
 
 /*
  * Begin Deactivation Functions - Uninstall is handled by uninstall.php
  */
-
 function cjs_plugin_deactivation() {
     add_option('Deactivated_Plugin', 'CJs-Plugin');
 }
