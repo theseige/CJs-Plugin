@@ -53,6 +53,18 @@ function cjs_add_class_to_body()
     return $classes;
 }
 
+function cjs_get_users_github()
+{
+    $githubUser = wp_remote_retrieve_body( wp_remote_get('https://api.github.com/users/theseige' ));
+    $githubUser = explode(",", $githubUser, -1);
+    $githubUser = str_replace("{", "", $githubUser);
+    $githubUser = str_replace('"', " ", $githubUser);
+
+    for ($i = 0; $i < count($githubUser); $i++) {
+        echo '<div style="border:1px solid black;font-size:.7em;padding:1em;" class="alignleft">' . $githubUser[$i] . ' </div>';
+    }
+}
+
 function cjs_options_page()
 {
 /* Using this function will add a menu option directly on the main menu
@@ -102,8 +114,7 @@ function cjs_options_page_html()
             <p><?php echo esc_html('It works!' ); ?></p>
         </div>
     <?php
-    $body = wp_remote_retrieve_body( wp_remote_get('https://api.github.com/users/theseige' ));
-    echo $body;
+    echo cjs_get_users_github() ;
 }
 
 /*
