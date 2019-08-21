@@ -32,13 +32,13 @@ register_activation_hook(__FILE__, 'cjs_plugin_activation' );
 
 function load_plugin()
 {
-    if ( is_admin && get_option('Activated_Plugin' ) == 'CJs-Plugin' ) {
+    if ( is_admin() && get_option('Activated_Plugin' ) == 'CJs-Plugin' ) {
         delete_option('Activated_Plugin');
 	    add_action( 'admin_notices', 'generate_activation_notice');
     }
 }
 
-add_action(admin_init, load_plugin());
+add_action('admin_init', 'load_plugin');
 
 
 /*
