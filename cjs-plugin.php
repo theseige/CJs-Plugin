@@ -82,9 +82,8 @@ function cjs_options_page()
 /*
  * Using this function will add a submenu option under Tools
 */
-
-    add_submenu_page(
-            'tools.php',
+add_submenu_page(
+        'tools.php',
         'CJs Options',
         'CJs Options',
         'manage_options',
