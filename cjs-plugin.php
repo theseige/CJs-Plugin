@@ -7,6 +7,7 @@ Description: My general plugin where I do testing and complex things.
 Version: 1.0
 Author: CJ Andren
 Author URI: https://wp.cjs.zone/
+Text-Domain: cjs-text-domain
 License: GPL2
 */
 
@@ -14,7 +15,7 @@ License: GPL2
 /*
 Begin Activation Functions
 */
-function generate_activation_notice()
+function cjs_generate_activation_notice()
 {
     ?>
     <div class="notice notice-success is-dismissable">
@@ -34,7 +35,7 @@ function load_plugin()
 {
     if ( is_admin() && get_option('Activated_Plugin' ) == 'CJs-Plugin' ) {
         delete_option('Activated_Plugin');
-	    add_action( 'admin_notices', 'generate_activation_notice');
+	    add_action( 'admin_notices', 'cjs_generate_activation_notice');
     }
 }
 
@@ -61,7 +62,7 @@ function cjs_get_users_github()
     $githubUser = str_replace('"', " ", $githubUser);
 
     for ($i = 0; $i < count($githubUser); $i++) {
-        echo '<div style="border:1px solid black;font-size:.7em;padding:1em;" class="alignleft">' . $githubUser[$i] . ' </div>';
+        _e('<div style="border:1px solid black;font-size:.7em;padding:1em;" class="alignleft">' . $githubUser[$i] . ' </div>', 'cjs-text-domain');
     }
 }
 
@@ -134,7 +135,7 @@ function cjs_options_page_remove()
  */
 function cjs_post_action()
 {
-    echo esc_html('This is a post action performed by CJs Plugin!');
+    __e(esc_html('This is a post action performed by CJs Plugin!'), 'cjs-text-domain');
 }
 
 /*
@@ -144,7 +145,7 @@ function cjs_shortcodes_init()
 {
     function cjs_shortcode($atts = [], $content = null)
     {
-	    echo esc_html('My shortcode works!');
+	    _e(esc_html('My shortcode works!'),'cjs-text-domain');
 	    return $content;
     }
     add_shortcode('cjs', 'cjs_shortcode');
